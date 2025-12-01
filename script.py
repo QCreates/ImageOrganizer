@@ -72,15 +72,21 @@ while row <= ws.max_row:
 
     img_index = 1
     # Place each extra image into an available or newly inserted row
+    handle = ""
     for img in extra_images:
         # If we've passed the bottom → always insert a new row
         if insert_row > ws.max_row:
             ws.insert_rows(insert_row)
+            ws.cell(row=insert_row, column=IMAGES_COL-2).value = handle
 
         # If next row's Images cell is NOT empty → new product starts → insert row
         elif not is_blank_image_cell(ws, insert_row, IMAGES_COL):
             ws.insert_rows(insert_row)
-
+            ws.cell(row=insert_row, column=IMAGES_COL-2).value = handle
+            #Insert handle
+        else:
+            handle = ws.cell(row=insert_row, column=IMAGES_COL-2).value
+            print(handle)
         # Write image into the Images column ONLY
         ws.cell(row=insert_row, column=IMAGES_COL).value = img
         ws.cell(row=insert_row-1, column=INDEX_COL).value = img_index
@@ -89,7 +95,7 @@ while row <= ws.max_row:
         insert_row += 1
     # Add last index number
     ws.cell(row=insert_row-1, column=INDEX_COL).value = img_index
-    print(f"Row ({row}/{ws.max.row})")
+    print(f"Row ({row}/{ws.max_row})")
     row += 1
 
 
