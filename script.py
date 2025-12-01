@@ -38,6 +38,9 @@ for name, col in headers.items():
         EXTRA_COLS.append(col)
 print(EXTRA_COLS)
 
+# Add new Image Index column at far right
+INDEX_COL = ws.max_column + 1
+ws.cell(row=1, column=INDEX_COL).value = "Image Index"
 
 # -----------------------------------------
 # Main loop
@@ -58,6 +61,7 @@ while row <= ws.max_row:
         v = ws.cell(row=row, column=col).value
         if v not in (None, "", " "):
             extra_images.append(v)
+        
 
     # Nothing to do?
     if not extra_images:
@@ -66,9 +70,9 @@ while row <= ws.max_row:
 
     insert_row = row + 1
 
+    img_index = 1
     # Place each extra image into an available or newly inserted row
     for img in extra_images:
-
         # If we've passed the bottom → always insert a new row
         if insert_row > ws.max_row:
             ws.insert_rows(insert_row)
@@ -79,9 +83,13 @@ while row <= ws.max_row:
 
         # Write image into the Images column ONLY
         ws.cell(row=insert_row, column=IMAGES_COL).value = img
-
+        ws.cell(row=insert_row-1, column=INDEX_COL).value = img_index
+        
+        img_index += 1
         insert_row += 1
-
+    # Add last index number
+    ws.cell(row=insert_row-1, column=INDEX_COL).value = img_index
+    print(f"Row ({row}/{ws.max.row})")
     row += 1
 
 
