@@ -1,0 +1,1 @@
+Extra images after the first image must be labeled as numbers eg Image | 2 | 3 | 4 | 5 where each number column may or may not have an image.
