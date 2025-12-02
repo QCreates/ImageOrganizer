@@ -86,7 +86,7 @@ while row <= ws.max_row:
             #Insert handle
         else:
             handle = ws.cell(row=insert_row, column=IMAGES_COL-2).value
-            print(handle)
+
         # Write image into the Images column ONLY
         ws.cell(row=insert_row, column=IMAGES_COL).value = img
         ws.cell(row=insert_row-1, column=INDEX_COL).value = img_index
