@@ -19,6 +19,8 @@ python -m pip install openpyxl
 python script.py
 ```
 
-The output is `input_updated.xlsx` in the same directory. The script adds an `Image Index` column and may insert rows to make space for extra images. It leaves `input.xlsx` in place. Check the handle and image values in the generated rows before importing the file.
+The output is `input_updated.xlsx` in the same directory. The script adds an `Image Index` column and may insert rows to make space for extra images. It leaves `input.xlsx` in place.
+
+**Known limitation:** In a basic workbook with one product and two extra images, the inserted image rows had blank `Handle` cells. Check and fill the generated rows as required by your destination import format. The script does not import anything into Shopify.
 
 No license file is currently included.
